@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1d4ed8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="Cổng ôn tập tương tác môn Sinh lý bệnh – Miễn dịch (Đại cương Miễn dịch học) Tuyển sinh Sau đại học – Cao học Khoa học Y sinh ĐH Y Dược TP.HCM (YDS) 2026." />
+  <title>Ôn Tập Sinh Lý Bệnh – Miễn Dịch SĐH 2026 - ĐH Y Dược TP.HCM (YDS)</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231d4ed8'/%3E%3Cpath d='M32 14v18M32 32L18 46M32 32l14 14M20 42l-4 4M44 42l4 4' stroke='%23ffffff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Ccircle cx='32' cy='15' r='4' fill='%232dd4bf'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- LỚP PHỦ ĐÓNG DRAWER TRÊN ĐIỆN THOẠI / TABLET -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar" id="sidebar" aria-label="Danh mục 6 bài học Sinh lý bệnh - Miễn dịch">
+    <div class="sidebar-header">
+      <div class="sidebar-header-top">
+        <span class="brand-badge">Đề cương SĐH 2026 • KHYS YDS</span>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" type="button" aria-label="Đóng danh mục">✕</button>
+      </div>
+      <div class="sidebar-title">SINH LÝ BỆNH – MIỄN DỊCH</div>
+      <div class="sidebar-subtitle">6 Bài (ĐC Miễn dịch) • 19 Hình &amp; Sơ đồ • 144 Câu KSA</div>
+    </div>
+
+    <div class="overall-progress-box">
+      <div class="progress-label-row">
+        <span>Tiến độ trên thiết bị này</span>
+        <strong id="overallProgressText">0 / 6 bài (0%)</strong>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="overallProgressFill"></div>
+      </div>
+      <div class="storage-note" id="storageStatusNote">💾 Lưu tạm trên trình duyệt thiết bị này (không đồng bộ)</div>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="search" id="lessonSearchInput" placeholder="🔍 Tìm bài học, lympho, clone, HEV..." autocomplete="off" />
+    </div>
+
+    <nav class="nav-list" id="sidebarNav">
+      <!-- Populated dynamically by app.js -->
+    </nav>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle-btn" id="menuToggleBtn" type="button" title="Mở danh mục 6 bài" aria-label="Mở danh mục bài học">☰ <span class="hide-xs">Danh mục</span></button>
+        <div class="breadcrumb" id="breadcrumb">Tổng quan Đề cương Sinh lý bệnh – Miễn dịch Sau đại học 2026</div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-outline topbar-btn" id="btnOverview" type="button" onclick="App.showOverview()" title="Về tổng quan 6 bài">
+          <span>📋</span> <span class="hide-sm">Đề cương 6 bài</span><span class="show-sm-only">6 bài</span>
+        </button>
+        <button class="btn btn-outline topbar-btn" id="btnAtlas" type="button" onclick="App.showAtlas()" title="Xem toàn bộ 19 Hình &amp; Sơ đồ chú thích">
+          <span>🖼️</span> <span class="hide-sm">Atlas 19 Hình</span><span class="show-sm-only">Atlas</span>
+        </button>
+        <button class="btn btn-accent topbar-btn" id="btnMockExam" type="button" onclick="App.showMockExam()" title="Phòng thi thử tổng hợp">
+          <span>🎯</span> <span>Thi thử</span><span class="hide-sm"> Tổng hợp</span>
+        </button>
+        <button class="btn btn-outline topbar-btn" id="btnThemeToggle" type="button" onclick="App.toggleTheme()" title="Đổi giao diện Sáng/Tối">🌙 <span class="hide-sm">Giao diện tối</span></button>
+      </div>
+    </header>
+
+    <main class="content-container" id="mainContent">
+      <!-- Dynamic view rendered here -->
+    </main>
+  </div>
+
+  <!-- MODAL PHÓNG TO HÌNH & SƠ ĐỒ -->
+  <div class="atlas-modal-backdrop" id="atlasModal" aria-hidden="true">
+    <div class="atlas-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="atlasModalTitle">
+      <div class="atlas-modal-header">
+        <div id="atlasModalTitle" class="atlas-modal-title"></div>
+        <button type="button" class="atlas-modal-close" onclick="App.closeAtlasModal()" aria-label="Đóng">✕</button>
+      </div>
+      <div class="atlas-modal-body" id="atlasModalBody"></div>
+    </div>
+  </div>
+
+  <!-- THANH ĐIỀU HƯỚNG NHANH CHO ĐIỆN THOẠI (MOBILE BOTTOM BAR) -->
+  <nav class="mobile-bottom-bar" aria-label="Điều hướng nhanh trên di động">
+    <button type="button" class="mbb-item" onclick="App.openDrawer()">
+      <span class="mbb-icon">☰</span>
+      <span class="mbb-label">6 Bài</span>
+    </button>
+    <button type="button" class="mbb-item" id="mbbOverview" onclick="App.showOverview()">
+      <span class="mbb-icon">📋</span>
+      <span class="mbb-label">Đề cương</span>
+    </button>
+    <button type="button" class="mbb-item" id="mbbAtlas" onclick="App.showAtlas()">
+      <span class="mbb-icon">🖼️</span>
+      <span class="mbb-label">19 Hình</span>
+    </button>
+    <button type="button" class="mbb-item" id="mbbMock" onclick="App.showMockExam()">
+      <span class="mbb-icon">🎯</span>
+      <span class="mbb-label">Thi thử</span>
+    </button>
+    <button type="button" class="mbb-item" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+      <span class="mbb-icon">⬆️</span>
+      <span class="mbb-label">Đầu trang</span>
+    </button>
+  </nav>
+
+  <!-- Data & Logic Scripts -->
+  <script src="figures_data.js"></script>
+  <script src="data_part1.js"></script>
+  <script src="data_part2.js"></script>
+  <script src="questions_extra.js"></script>
+  <script src="animations.js"></script>
+  <script src="simulators.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
